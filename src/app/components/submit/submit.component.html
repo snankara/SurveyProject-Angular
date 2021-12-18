@@ -1,0 +1,28 @@
+<div class="px-4 py-5 my-5 text-center">
+    <h1 class="display-5 fw-bold">Cevabınız Gönderiliyor.</h1>
+    <div class="col-lg-6 mx-auto mt-5">
+        <div>
+            <i *ngIf="!answer" class="bi bi-check-circle span-icon"></i>
+            <i *ngIf="answer" class="bi bi-check-circle-fill span-icon"></i>
+            <span class="lead text-muted m-2">Cevaplarınızı Kontrol Ediyoruz . . .</span>
+        </div> 
+
+        <div class="mt-4">
+            <i *ngIf="!isConnectApi" class="bi bi-gear span-icon"></i>
+            <i *ngIf="isConnectApi" class="bi bi-gear-fill span-icon"></i>
+            <span class="lead text-muted m-2">Veri Tabanımıza Bağlanıyoruz . . .</span>
+        </div>
+
+        <div class="mt-4 mb-4">
+            <i *ngIf="!isSent" class="bi bi-send-check span-icon"></i>
+            <i *ngIf="isSent" class="bi bi-send-check-fill span-icon"></i>
+            <span class="lead text-muted m-3">Cevaplarınızı Gönderiyoruz . . .</span>
+        </div>
+
+        <span *ngIf="answer && isConnectApi && isSent" class="lead text-success">Cevaplarınız Gönderildi !</span>
+
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <a type="button" *ngIf="answer && isConnectApi && isSent" class="btn btn-primary px-3 gap-3 mt-4" [routerLink]="['']">Anasayfaya Dön</a>
+        </div>
+    </div>
+  </div>

@@ -1,0 +1,81 @@
+<div class="px-4 py-5 my-5 text-center">
+    <app-progress [progress]="progress"></app-progress>
+    <h1 class="display-5 fw-bold">Lütfen Seçim Yapınız</h1>
+    <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4">Devam edebilmek için seçim yapmalısınız.</p>
+        <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
+            <div class="carousel-inner">
+
+                <div class="carousel-item active">
+                    <p class="lead mb-4 text-muted">Lütfen cinsiyetinizi belirtin.</p>
+                    <input class="form-check-input" type="radio" name="gender" id="genderMale" value="male"
+                        (click)="setGender($event)" hidden>
+                    <input class="form-check-input" type="radio" name="gender" id="genderFemale" value="female"
+                        (click)="setGender($event)" hidden>
+                    <div class="img-container">
+                        <label for="genderMale">
+                            <img src="../../../assets/images/male.png" style="cursor: pointer;"
+                                [ngClass]="{'img-thumbnail' : surveyForm.value.gender === 'male', 'img-fluid': surveyForm.value.gender != 'male'}">
+                        </label>
+                    </div>
+                    <div class="img-container">
+                        <label for="genderFemale">
+                            <img src="../../../assets/images/female.png" style="cursor: pointer;"
+                                [ngClass]="{'img-thumbnail' : surveyForm.value.gender === 'female', 'img-fluid': surveyForm.value.gender != 'female'}">
+                        </label>
+                    </div>
+                    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                        <button type="button" class="btn btn-primary px-5 gap-3"
+                            data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next"
+                            [disabled]="!surveyForm.value.gender">
+                             Devam
+                        </button>
+                    </div>
+                </div>
+
+                <div *ngIf="surveyForm.value.gender" class="carousel-item">
+                    <p class="lead mb-4 text-muted">Lütfen doğum tarihinizi belirtin.</p>
+                    <div class="input-group date-area">
+                        <select class="form-select" (change)="setDay($event)">
+                            <option selected>Day</option>
+                            <option *ngFor="let day of days" [value]="day">{{day}}</option>
+                        </select>
+                    </div>
+                    <div class="input-group date-area">
+                        <select class="form-select" (change)="setMonth($event)"
+                            [disabled]="surveyForm.value.dateOfBirth.day == ''">
+                            <option selected>Month</option>
+                            <option *ngFor="let month of months" [value]="month">{{month}}</option>
+                        </select>
+                    </div>
+                    <div class="input-group date-area">
+                        <select class="form-select" (change)="setYear($event)"
+                            [disabled]="surveyForm.value.dateOfBirth.month == ''">
+                            <option selected>Year</option>
+                            <option *ngFor="let year of years" [value]="year">{{year}}</option>
+                        </select>
+                    </div>
+                    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mt-5">
+                        <button type="button" class="btn btn-primary px-5 gap-3"
+                            data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next" 
+                            [disabled]="surveyForm.value.dateOfBirth.day == '' || 
+                            surveyForm.value.dateOfBirth.month == '' || 
+                            surveyForm.value.dateOfBirth.year == ''">Devam</button>
+                    </div>
+                </div>
+
+                <div *ngIf="surveyForm.value.dateOfBirth.year != ''" class="carousel-item">
+                    <p class="lead mb-4 text-muted">Lütfen doğum yerinizi belirtin.</p>
+                    <input class="form-control date-area" list="datalistOptions" id="exampleDataList"
+                        placeholder="Buraya yazabilirsiniz..." (change)="setPlaceOfBirth($event)">
+                    <datalist id="datalistOptions">
+                        <option *ngFor="let item of cities" [value]="item.city">
+                    </datalist>
+                    <p *ngIf="progress == 100" class="lead text-muted mt-3">Yönlendiriliyorsunuz...</p>
+                </div>
+                
+            </div>
+
+        </div>
+    </div>
+</div>

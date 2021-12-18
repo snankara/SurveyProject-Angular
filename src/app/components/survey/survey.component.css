@@ -1,0 +1,16 @@
+.img-container{
+    width: 180px;
+    height: 180px;
+    display: inline-block;
+}
+
+.img-thumbnail{
+    padding: 0;
+    border: 1px solid #9da0a3;
+}
+
+.date-area{
+    width: auto;
+    display: inline-flex;
+    margin: 5px;
+}
